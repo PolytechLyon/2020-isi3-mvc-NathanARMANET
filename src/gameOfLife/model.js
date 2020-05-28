@@ -113,9 +113,9 @@ export class Model {
   }
 
   updateCell(e, MinX, MinY) {
-    console.log(e.layerX - MinX, e.layerY - MinY);
-    var gridX = Math.floor((e.layerX - MinX) / (CELL_SIZE+1));
-    var gridY = Math.floor((e.layerY - MinY) / (CELL_SIZE+1));
+    
+    var gridX = Math.floor((e.x - MinX) / (CELL_SIZE+1));
+    var gridY = Math.floor((e.y - MinY) / (CELL_SIZE+1));
     console.log(gridX, gridY);
 
     var xy = this.state[gridX][gridY];
