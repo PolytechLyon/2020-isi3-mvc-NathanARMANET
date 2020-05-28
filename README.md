@@ -59,7 +59,7 @@ L'objet _Model_ n'a pas de lien avec `la View` pourtant grâce à la `notificati
 > Si vous voulez apprendre d'autres choses
 
 - [x] Faire sorte de pouvoir changer les dimensions de la grille par in `<input/>` HTML.
-- [] Faire en sorte de pouvoir modifier l'état d'une cellule en cliquant dessus.
+- [ ] Faire en sorte de pouvoir modifier l'état d'une cellule en cliquant dessus.
 
 ## :warning: À rendre
 

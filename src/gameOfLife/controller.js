@@ -1,4 +1,4 @@
-import {Model} from "./model";
+import {canvas} from "./view";
 
 export const controller = model => {
 
@@ -12,5 +12,9 @@ export const controller = model => {
 
   document.getElementById('reset').addEventListener("click", () => {
     model.reset();
+  })
+
+  canvas.addEventListener('click', (event) => {
+    model.updateCell(event)
   })
 };

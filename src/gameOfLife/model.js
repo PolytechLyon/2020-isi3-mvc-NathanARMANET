@@ -2,7 +2,8 @@ import {
   GAME_SIZE,
   CELL_STATES,
   DEFAULT_ALIVE_PAIRS,
-  RENDER_INTERVAL
+  RENDER_INTERVAL,
+  CELL_SIZE
 } from "./constants";
 
 export class Model {
@@ -20,6 +21,7 @@ export class Model {
     DEFAULT_ALIVE_PAIRS.forEach(([x, y]) => {
       this.state[y][x] = CELL_STATES.ALIVE;
     });
+
     this.updated();
   }
 
@@ -86,6 +88,7 @@ export class Model {
       x < this.height &&
       this.state[y][x] === CELL_STATES.ALIVE ? 1 : 0;
   }
+
   aliveNeighbours(x, y) {
     let number = 0;
     // TODO
@@ -101,13 +104,32 @@ export class Model {
       }
     }
 
-
-
     return number;
   }
 
   updated() {
     // TODO update the view
     this.callback(this);
+  }
+
+  updateCell(e) {
+    console.log(e.layerX, e.layerY);
+    var gridX = Math.floor((e.layerX - 556) / CELL_SIZE);
+    var gridY = Math.floor((e.layerY - 41) / CELL_SIZE);
+    console.log(gridX, gridY);
+
+    var xy = this.state[gridX][gridY];
+    if (xy === CELL_STATES.ALIVE) {
+      this.state[gridX][gridY] = CELL_STATES.DEAD;
+      console.log("CELL_STATES.DEAD");
+    } else if (xy === CELL_STATES.DEAD) {
+      this.state[gridX][gridY] = CELL_STATES.NONE;
+      console.log("CELL_STATES.NONE");
+    } else {
+      this.state[gridX][gridY] = CELL_STATES.ALIVE;
+      console.log("CELL_STATES.ALIVE");
+    }
+
+    this.updated()
   }
 }

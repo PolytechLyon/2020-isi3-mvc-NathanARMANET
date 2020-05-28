@@ -1,6 +1,6 @@
 import { GAME_SIZE, CELL_SIZE } from "./constants";
 
-const canvas = document.createElement("canvas");
+export const canvas = document.createElement("canvas");
 const context = canvas.getContext("2d");
 
 const drawCell = (x, y, value) => {
