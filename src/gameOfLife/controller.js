@@ -15,6 +15,6 @@ export const controller = model => {
   })
 
   canvas.addEventListener('click', (event) => {
-    model.updateCell(event)
+    model.updateCell(event, canvas.offsetLeft, canvas.offsetTop)
   })
 };
