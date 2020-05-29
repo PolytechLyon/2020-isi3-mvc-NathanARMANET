@@ -1,6 +1,16 @@
-import {canvas} from "./view";
+import {canvas, drawGame, initView} from "./view";
+import {GAME_SIZE} from "./constants";
 
 export const controller = model => {
+
+  document.getElementById('size').addEventListener("click", () => {
+    let size = document.getElementById("size").valueAsNumber;
+    initView(size);
+    model.height = size;
+    model.width = size;
+    model.init();
+    drawGame(model);
+  })
 
   document.getElementById('start').addEventListener("click", () => {
     model.run();

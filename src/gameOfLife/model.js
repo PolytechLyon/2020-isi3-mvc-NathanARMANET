@@ -34,21 +34,21 @@ export class Model {
             Array.from(new Array(this.width), () => CELL_STATES.NONE)
         );
 
-        for (let i = 0; i < this.width; i++) {
+        for (let i = 0; i < this.height; i++) {
           for (let j = 0; j < this.width; j++) {
             const nbAlive = this.aliveNeighbours(i, j);
             const isAlive = this.isCellAlive(i, j);
 
             // TODO implement Game of life logic
             if ((!isAlive && nbAlive === 3) || (isAlive && (nbAlive === 2 || nbAlive === 3))) {
-              newState[j][i] = CELL_STATES.ALIVE;
-            } else if (!isAlive && this.state[j][i] === CELL_STATES.NONE) {
-              newState[j][i] = CELL_STATES.NONE;
+              newState[i][j] = CELL_STATES.ALIVE;
+            } else if (!isAlive && this.state[i][j] === CELL_STATES.NONE) {
+              newState[i][j] = CELL_STATES.NONE;
             } else {
-              newState[j][i] = CELL_STATES.DEAD;
+              newState[i][j] = CELL_STATES.DEAD;
             }
 
-            if (this.state[j][i] !== newState[j][i]) {
+            if (this.state[i][j] !== newState[i][j]) {
               change = true;
             }
           }
@@ -84,9 +84,9 @@ export class Model {
   isCellAlive(x, y) {
     return x >= 0 &&
       y >= 0 &&
-      y < this.height &&
+      y < this.width &&
       x < this.height &&
-      this.state[y][x] === CELL_STATES.ALIVE ? 1 : 0;
+      this.state[x][y] === CELL_STATES.ALIVE ? 1 : 0;
   }
 
   aliveNeighbours(x, y) {
@@ -98,7 +98,7 @@ export class Model {
     // la droite et l gauche sont liés
     for (let k = -1 ; k < 2 ; k++) {
       for (let l = -1 ; l < 2 ; l++) {
-        if ((k !== 0 || l !== 0) && this.isCellAlive((x+k+this.height)%this.height, (y+l+this.height)%this.height)) {
+        if ((k !== 0 || l !== 0) && this.isCellAlive((x+k+this.height)%this.height, (y+l+this.width)%this.width)) {
           number++;
         }
       }
@@ -113,7 +113,6 @@ export class Model {
   }
 
   updateCell(e, MinX, MinY) {
-    
     var gridX = Math.floor((e.x - MinX) / (CELL_SIZE+1));
     var gridY = Math.floor((e.y - MinY) / (CELL_SIZE+1));
     console.log(gridX, gridY);
